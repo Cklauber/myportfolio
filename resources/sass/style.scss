@@ -1,0 +1,42 @@
+//fonts
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Merriweather|Nunito|Roboto|Montserrat+Alternates|Montserrat|Titillium+Web');
+body {
+    background: linear-gradient(160deg, #5cb4d7, #b6b6b7);
+}
+
+#app{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.main-content{
+flex: 1;
+}
+
+//Navbar
+.navbar-item{
+    font-family: Merriweather;
+    padding: 0rem 1rem 0rem 1rem;
+}
+.navbar-item img {
+    max-height: 2.75rem;
+}
+.is-transparent{
+    background-color: #f0f8ff00;
+}
+//This one doesn't work if I just overwrite the variable lol
+.navbar.is-dark .navbar-end > a.navbar-item:hover{
+    color: #4c88a5;
+}
+
+footer{
+    padding: 1rem 1.5rem 1rem !important;
+    background-color: #363636 !important;
+    color: white;
+}
+.social-media{
+    margin: 0px 10px 10px 10px;
+}
+.footer > .container > .columns > .column > .subtitle {
+    margin-bottom: 0 !important;
+}

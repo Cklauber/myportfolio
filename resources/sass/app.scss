@@ -1,0 +1,19 @@
+[v-cloak] {
+  display: none;
+}
+// Variables
+@import 'variables';
+
+///My Overwrites
+@import 'overwrites';
+
+// bulma
+@import '~bulma/bulma';
+
+//My Styles
+@import 'style';
+
+//Importing font awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
