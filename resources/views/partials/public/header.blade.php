@@ -12,14 +12,14 @@
                 </a>
             </div>
             <div id="navbar" class="navbar-menu">
-                <div class="navbar-end">
+                {{-- <div class="navbar-end">
                     <a href="/" class="navbar-item">Index</a>
                     <a href="/" class="navbar-item">Portfolio</a>
                     <a href="/" class="navbar-item">Education</a>
                     <a href="/" class="navbar-item">Resume</a>
                     <a href="/" class="navbar-item">Skills</a>
                     <a href="/" class="navbar-item">Contact Me</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </nav>
