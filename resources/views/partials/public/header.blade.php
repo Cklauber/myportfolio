@@ -5,11 +5,11 @@
                 <a href="/" class="navbar-item">
                     <img src="/img/logo.png" alt="Clauber Oliveira">
                 </a>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
+                {{-- <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                </a>
+                </a> --}}
             </div>
             <div id="navbar" class="navbar-menu">
                 {{-- <div class="navbar-end">
