@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('/admin')->group(function () {
-    Route::post('/portfolio', function () {
-        App\Project::create(request(['title','description']));
-    })->name('portfolio.post');
+Route::prefix('/admin')->middleware('auth')->group(function () {
+    Route::get('/portfolio', 'ProjectController@index');
+    Route::get('/portfolio/{project}', 'ProjectController@show')->name('admin.portfolio.show');
+    Route::post('/portfolio', 'ProjectController@store')->name('portfolio.post');
 });

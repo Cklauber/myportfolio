@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+
+        return view('projects.index', compact(['projects']));
     }
 
     /**
@@ -35,12 +38,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //Validate
+        $this->middleware('auth');
 
+        //Validate
+        $attributes = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'stack' => 'nullable',
+        ]);
+        $attributes['slug'] = str_slug($attributes['title'], '-');
+        $attributes['created_by'] = Auth::id();
+        
         //Persist
-        Project::create(request(['title','description', 'stack']));
+        Project::create($attributes);
 
         //Redirect
+        return redirect('/admin/projects');
     }
 
     /**
@@ -51,7 +64,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('projects.show', compact(['project']));
     }
 
     /**
