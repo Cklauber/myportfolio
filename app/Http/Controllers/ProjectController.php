@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = auth()->user()->projects;
 
         return view('projects.index', compact(['projects']));
     }
@@ -44,13 +44,12 @@ class ProjectController extends Controller
         $attributes = request()->validate([
             'title' => 'required',
             'description' => 'required',
+            'slug' => 'required',
             'stack' => 'nullable',
         ]);
-        $attributes['slug'] = str_slug($attributes['title'], '-');
-        $attributes['created_by'] = Auth::id();
-        
+
         //Persist
-        Project::create($attributes);
+        Auth::user()->projects()->create($attributes);
 
         //Redirect
         return redirect('/admin/projects');
@@ -64,6 +63,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        if (auth()->user()->isNot($project->owner)) {
+            return abort(403);
+        }
+        
         return view('projects.show', compact(['project']));
     }
 

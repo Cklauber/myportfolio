@@ -18,8 +18,8 @@ class CreateProjectsTable extends Migration
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description');
-            $table->string('created_by')->unsigned();
-            $table->foreign('created_by')
+            $table->unsignedInteger('owner_id')->unsigned();
+            $table->foreign('owner_id')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');

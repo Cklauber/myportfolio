@@ -2,13 +2,11 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User;
-
 class Project extends BaseModel
 {
-    public function created_by()
+    public function owner()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function privatePath()
