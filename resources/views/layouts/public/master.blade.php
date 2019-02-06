@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="/img/logo.png">        
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="public-view">
         @include('partials.public.header')
         <main class="bd-main main-content">
             @yield('content')

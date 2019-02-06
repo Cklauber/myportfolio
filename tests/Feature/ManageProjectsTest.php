@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class PortfoliosTest extends TestCase
+class ManageProjectsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
@@ -18,36 +18,32 @@ class PortfoliosTest extends TestCase
 
         $this->actingAs(factory('App\User')->create());
 
+        $this->get((route('project.create')))->assertStatus(200);
+
         $attributes = factory('App\Project')->raw(['owner_id' => \Auth::id()]);
 
-        $this->post('/admin/portfolio', $attributes);
+        $this->post(route('project.store'), $attributes);
 
         $this->assertDatabaseHas('projects', $attributes);
     }
 
     /** @test */
     
-    public function guest_cannot_admin_project_list()
-    {
-        $this->get('/admin/portfolio')->assertRedirect('/admin');
-    }
-
-    /** @test */
-    
-    public function guest_cannot_admin_a_single_project()
+    public function guest_cannot_manage_projects()
     {
         $project = factory('App\Project')->create();
-        
+
+        //They cannot have a private view of it
         $this->get($project->privatePath())->assertRedirect('/admin');
-    }
 
-    /** @test */
+        //Cannot see a list of it
+        $this->get(route('admin.project.index'))->assertRedirect('/admin');
 
-    public function guests_cannot_create_a_project()
-    {
-        $attributes = factory('App\Project')->raw(['owner_id' => '']);
+        //Cannot create it
+        $this->post(route('project.store'), $project->toArray())->assertRedirect('/admin');
 
-        $this->post('/admin/portfolio', $attributes)->assertRedirect('/admin');
+        //Cannot view create form
+        $this->get(route('project.create'))->assertRedirect('/admin');
     }
 
     /** @test */
@@ -73,7 +69,7 @@ class PortfoliosTest extends TestCase
 
         $projects = factory('App\Project', 2)->create(['owner_id' => \Auth::id()]);
 
-        $this->get(route('admin.portfolio'))
+        $this->get(route('admin.project.index'))
         ->assertSee($projects[0]->title)
         ->assertSee($projects[1]->title)
         ->assertDontSee($projectsByAnotherUser[0]->title)
@@ -86,10 +82,9 @@ class PortfoliosTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->actingAs(factory('App\User')->create());
-
+        $this->be(factory('App\User')->create());
+        
         $project = factory('App\Project')->create(['owner_id' => \Auth::id()]);
-
         $this->get($project->privatePath())
         ->assertSee($project->title)
         ->assertSee($project->description);
@@ -103,7 +98,7 @@ class PortfoliosTest extends TestCase
 
         $attributes = factory('App\Project')->raw(['title' => '']);
 
-        $this->post('/admin/portfolio', $attributes)->assertSessionHasErrors('title');
+        $this->post('/admin/project', $attributes)->assertSessionHasErrors('title');
     }
     
     /** @test */
@@ -114,6 +109,6 @@ class PortfoliosTest extends TestCase
 
         $attributes = factory('App\Project')->raw(['description' => '']);
 
-        $this->post('/admin/portfolio', $attributes)->assertSessionHasErrors('description');
+        $this->post('/admin/project', $attributes)->assertSessionHasErrors('description');
     }
 }

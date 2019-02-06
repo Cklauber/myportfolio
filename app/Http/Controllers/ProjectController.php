@@ -27,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -38,21 +38,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->middleware('auth');
-
         //Validate
         $attributes = request()->validate([
             'title' => 'required',
             'description' => 'required',
-            'slug' => 'required',
+            'slug' => 'nullable',
             'stack' => 'nullable',
         ]);
+        if (request('slug') == '') {
+            $attributes['slug'] = str_slug(request('title'));
+        }
 
         //Persist
         Auth::user()->projects()->create($attributes);
 
         //Redirect
-        return redirect('/admin/projects');
+        return redirect(route('admin.project.index'));
     }
 
     /**

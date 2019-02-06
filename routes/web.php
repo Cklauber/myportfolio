@@ -18,10 +18,15 @@ Route::get('/', function () {
 
 // Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
-    Route::get('/portfolio', 'ProjectController@index')->name('admin.portfolio');
-    Route::get('/portfolio/{project}', 'ProjectController@show')->name('admin.portfolio.show');
-    Route::post('/portfolio', 'ProjectController@store')->name('portfolio.post');
+    //https://laravel.com/docs/5.7/controllers#resource-controllers
+    Route::resource('project', 'ProjectController')
+    ->names([
+        'index' => 'admin.project.index',
+        'show' => 'admin.project.show',
+    ]);
+
+    Route::get('/home', 'HomeController@index')->name('home');
 });

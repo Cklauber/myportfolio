@@ -11,7 +11,7 @@ class Project extends BaseModel
 
     public function privatePath()
     {
-        return route('admin.portfolio.show', $this->slug);
+        return route('admin.project.show', $this->slug);
     }
 
     public function publicPath()

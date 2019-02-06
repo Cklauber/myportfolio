@@ -11,14 +11,16 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>Clauber Oliveira - Admin</title>
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <title>Admin</title>
 
     <!--Favicon -->
     <link rel="shortcut icon" href="/img/logo.png">        
 </head>
 <body>
-        <main class="bd-main main-content">
+    <div id="app">
+        @include('partials.admin.header')
+        <main class="container">
             @yield('content')
         </main>
     </div>
