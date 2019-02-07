@@ -19,6 +19,8 @@ class CreateProjectsTable extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->unsignedInteger('owner_id')->unsigned();
+            $table->enum('status', ['completed', 'word in progress', 'cancel', 'drafted', 'created'])->default('initiated');
+            $table->boolean('published')->default('false');
             $table->foreign('owner_id')
             ->references('id')
             ->on('users')

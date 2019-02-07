@@ -1,6 +1,12 @@
 @extends('layouts.admin.master')
+@section('title')
+  -  Projects
+@endsection
 @section('content')
-    <h1 class="title is-4">Portfolio</h1>
+    <div class="flex items-center">
+        <h1 class="title is-4 mr-auto mr-auto">Portfolio</h1>
+        <a href="{{route('project.create')}}">New project</a>
+    </div>
     <div>
         <ul>
             @forelse ($projects as $project)

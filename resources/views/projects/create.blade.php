@@ -1,12 +1,8 @@
-<html>
-    <head>
-    <title>Create a Project </title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
-    
-</head>
-    <body>
-        
+@extends('layouts.admin.master')
+@section('title')
+    - New Project
+@endsection
+@section('content')        
         <form class="container" action="{{route('project.store')}}" method="post">
         @csrf
 
@@ -55,8 +51,9 @@
 
                 <div class="control">
 
-                      <button type="submit" class="button is-link">Create Project</button>
+                    <button type="submit" class="button is-link">Create Project</button>
 
+                    <a href="{{url()->previous()}}">Cancel</a>
                 </div>
 
             </div>
@@ -64,6 +61,5 @@
 
         
 
-        </form>
-    </body>
-</html>
+        </form>   
+@endsection

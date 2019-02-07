@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
-    <title>Admin</title>
+    <title>Admin @yield('title')</title>
 
     <!--Favicon -->
     <link rel="shortcut icon" href="/img/logo.png">        
@@ -20,7 +20,7 @@
 <body>
     <div id="app">
         @include('partials.admin.header')
-        <main class="container">
+        <main class="container pt-6">
             @yield('content')
         </main>
     </div>

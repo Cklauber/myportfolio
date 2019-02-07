@@ -26,4 +26,15 @@ class ProjectTest extends TestCase
         
         $this->assertInstanceOf("App\User", $project->owner);
     }
+
+    /** @test */
+    
+    public function can_be_completed()
+    {
+        $project = factory('App\Project')->create();
+
+        $project->complete();
+
+        $this->assertEquals('completed', $project->status);
+    }
 }
