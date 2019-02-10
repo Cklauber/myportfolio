@@ -572,6 +572,109 @@ table {
  * @import "components/forms";
  */
 
+.navbar-item {
+  padding-left: .5rem;
+  padding-right: .5rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  text-decoration: none;
+  color: #606f7b;
+  height: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  font-family: Merriweather;
+}
+
+a.navbar-item:hover {
+  color: #8795a1;
+  background-color: #f1f5f8;
+  border-bottom-width: 2px;
+  border-color: #6cb2eb;
+}
+
+a.navbar-item:active {
+  color: #b8c2cc;
+  background-color: #f8fafc;
+  border-bottom-width: 2px;
+  border-color: #bcdefa;
+}
+
+.btn {
+  background-color: #8795a1;
+  text-decoration: none;
+  color: #fff;
+  border-radius: .5rem;
+  padding: .5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  font-size: .875rem;
+}
+
+.btn:hover {
+  background-color: #606f7b;
+}
+
+.btn:active {
+  background-color: #3d4852;
+}
+
+.btn-blue {
+  background-color: #6cb2eb;
+}
+
+.btn-blue:hover {
+  background-color: #3490dc;
+}
+
+.btn-blue:active {
+  background-color: #2779bd;
+}
+
+.btn-red {
+  background-color: #ef5753;
+}
+
+.btn-red:hover {
+  background-color: #e3342f;
+}
+
+.btn-red:active {
+  background-color: #cc1f1a;
+}
+
+.btn-green {
+  background-color: #51d88a;
+}
+
+.btn-green:hover {
+  background-color: #38c172;
+}
+
+.btn-green:active {
+  background-color: #1f9d55;
+}
+
+.btn-yellow {
+  background-color: #fff382;
+}
+
+.btn-yellow:hover {
+  background-color: #ffed4a;
+}
+
+.btn-yellow:active {
+  background-color: #f2d024;
+}
+
+.card {
+  border-radius: .5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+  background-color: #fff;
+  padding: 1rem;
+  position: relative;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

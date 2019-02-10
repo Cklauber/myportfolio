@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Auth;
 
 class ManageProjectsTest extends TestCase
 {
@@ -16,14 +17,14 @@ class ManageProjectsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
 
         $this->get((route('project.create')))->assertStatus(200);
 
         $attributes = factory('App\Project')->raw(['owner_id' => \Auth::id()]);
 
         $this->post(route('project.store'), $attributes);
-
+    
         $this->assertDatabaseHas('projects', $attributes);
     }
 
@@ -50,9 +51,9 @@ class ManageProjectsTest extends TestCase
     
     public function an_authenticated_user_cannot_view_someone_elses_project()
     {
-        $project = factory('App\Project')->create();
+        $project = factory('App\Project')->create(['is_public' => true, 'owner_id' => 1]);
 
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
 
         $this->get($project->privatePath())->assertStatus(403);
     }
@@ -65,7 +66,7 @@ class ManageProjectsTest extends TestCase
 
         $projectsByAnotherUser = factory('App\Project', 2)->create();
 
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
 
         $projects = factory('App\Project', 2)->create(['owner_id' => \Auth::id()]);
 
@@ -94,7 +95,7 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_title()
     {
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
 
         $attributes = factory('App\Project')->raw(['title' => '']);
 
@@ -105,10 +106,19 @@ class ManageProjectsTest extends TestCase
 
     public function a_project_requires_a_description()
     {
-        $this->actingAs(factory('App\User')->create());
+        $this->signIn();
 
         $attributes = factory('App\Project')->raw(['description' => '']);
 
         $this->post('/admin/project', $attributes)->assertSessionHasErrors('description');
+    }
+
+    /** @test */
+    
+    public function a_public_repository_can_be_seen()
+    {
+        $project = factory('App\Project')->create(['is_public' => true]);
+        $this->get($project->publicPath())->assertStatus(402);
+        dd($project);
     }
 }

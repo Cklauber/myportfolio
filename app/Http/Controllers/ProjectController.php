@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+    public function publicNonAdmin($username, Project $project)
+    {
+        $user = App\User::where('username', $username)->firstOrFail();
+        $project = $user->projects->where('slug', $project)->firstOrFail();
+
+        if ($project->is_public == true) {
+            return view('public.project');
+        } else {
+            return abort(403, 'Unauthhorized.');
+        }
+    }
     /**
      * Display a listing of the resource.
      *

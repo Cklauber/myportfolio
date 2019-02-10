@@ -2,7 +2,19 @@
 @section('title')
     - New Project
 @endsection
-@section('content')        
+@section('content')  
+<header class="flex py-5">{{-- Header --}}
+    <div class="flex items-end mx-auto justify-between w-full">
+
+        <h1 class="text-base text-grey-dark">
+            <a href="{{route('admin.project.index')}}" class="text-grey-dark no-underline hover:text-grey active:text-grey-light">My Projects
+            </a>  
+            / New Project
+        </h1>
+        <a class="btn btn-grey" href="{{route('admin.project.index')}}">My Projects</a>
+
+    </div>       
+</header>      
         <form class="container" action="{{route('project.store')}}" method="post">
         @csrf
 
@@ -51,9 +63,9 @@
 
                 <div class="control">
 
-                    <button type="submit" class="button is-link">Create Project</button>
+                    <button type="submit" class="btn btn-green">Create</button>
 
-                    <a href="{{url()->previous()}}">Cancel</a>
+                    <a href="{{url()->previous()}}" class="btn btn-red">Cancel</a>
                 </div>
 
             </div>

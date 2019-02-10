@@ -15,7 +15,7 @@ class ProjectTest extends TestCase
     {
         $project = factory('App\Project')->create();
 
-        $this->assertEquals(route('admin.portfolio.show', $project->slug), $project->privatePath());
+        $this->assertEquals(route('admin.project.show', $project->slug), $project->privatePath());
     }
 
     /** @test */
@@ -32,9 +32,20 @@ class ProjectTest extends TestCase
     public function can_be_completed()
     {
         $project = factory('App\Project')->create();
-
+        
         $project->complete();
 
         $this->assertEquals('completed', $project->status);
+    }
+
+    /** @test */
+    
+    public function if_it_is_public_it_has_a_public_path()
+    {
+        $project = factory('App\Project')->create(['is_public' => true]);
+        
+        $this->assertEquals(route('public.user.project.show', [
+            'username' => $project->owner->username,
+            'slug' => $project->slug]), $project->publicPath());
     }
 }

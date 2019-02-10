@@ -17,10 +17,10 @@
     <!--Favicon -->
     <link rel="shortcut icon" href="/img/logo.png">        
 </head>
-<body>
+<body class="bg-grey-lighter">
     <div id="app">
         @include('partials.admin.header')
-        <main class="container pt-6">
+        <main class="container mx-auto">
             @yield('content')
         </main>
     </div>

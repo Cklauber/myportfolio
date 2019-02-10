@@ -35,6 +35,51 @@
   * @import "components/buttons";
   * @import "components/forms";
   */
+.navbar-item{
+    @apply .px-2 .mx-2 .no-underline .text-grey-darker .h-full .pt-6 .pb-4;
+    font-family: Merriweather;
+
+}
+a.navbar-item:hover{
+    @apply  .text-grey-dark .bg-grey-lighter .border-b-2 .border-blue-light
+}
+
+a.navbar-item:active{
+    @apply  .text-grey .bg-grey-lightest .border-b-2 .border-blue-lighter
+}
+
+.btn{
+    @apply .bg-grey-dark .no-underline .text-white .rounded-lg .p-2 .shadow .py-2 .text-sm;
+}
+.btn:hover{
+    @apply .bg-grey-darker;
+}
+.btn:active{
+    @apply .bg-grey-darkest;
+}
+
+$btnCollors: [
+    'blue',
+    'red',
+    'green',
+    'yellow'
+];
+
+@each $btnColor in $btnCollors{
+    .btn-#{$btnColor}{
+        @apply .bg-#{$btnColor}-light;
+    }
+    .btn-#{$btnColor}:hover{
+        @apply .bg-#{$btnColor};
+    }
+    .btn-#{$btnColor}:active{
+        @apply .bg-#{$btnColor}-dark;
+    }
+}
+
+.card{
+    @apply .rounded-lg .shadow-md .bg-white .p-4 .relative;
+}
  
  /**
   * This injects all of Tailwind's utility classes, generated based on your

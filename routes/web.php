@@ -16,7 +16,8 @@ Route::get('/', function () {
     return view('public.index');
 });
 
-// Auth::routes();
+Route::get('/project/{slug}', 'ProjectController@public')->name('public.project.show');
+Route::get('/project/{username}/{slug}', 'ProjectContrller@publicNonAdmin')->name('public.user.project.show');
 
 
 

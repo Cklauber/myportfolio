@@ -1,20 +1,17 @@
 [v-cloak] {
     display: none;
   }
+//fonts
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Merriweather|Nunito|Roboto|Montserrat+Alternates|Montserrat|Titillium+Web');
 
-  //tailwind
-  @import 'tailwind';
+// Variables
+@import 'variables';
 
-  // Variables
-  @import 'variables';
-  
-  // bulma
-  @import '~bulma/bulma';
-  
-  //My Styles
-  @import 'style';
-  
-  //Importing font awesome
-  @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-  @import "~@fortawesome/fontawesome-free/scss/solid.scss";
-  @import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+//Importing font awesome
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+//tailwind
+@import 'tailwind';

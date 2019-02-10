@@ -1,53 +1,50 @@
 <header>
-<nav class="navbar is-light has-shadow" role="navigation" aria-label="main navigation">
-    <div class="container">
-        <div class="navbar-brand">
-            <a href="/" class="navbar-item">
-                <img src="/img/logo.png" alt="Clauber Oliveira">
-            </a>
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-        <div id="navbar" class="navbar-menu">
-            <div class="navbar-start">
+    <nav class="flex items-center bg-white pin pin-t border-b border-grey z-100 h-16 " role="navigation"
+        aria-label="main navigation">
 
-                    <a href="{{route('home')}}" class="navbar-item">Dashboard</a>
+        <div id="navbar" class="container mx-auto flex h-full items-center">
+
+            <div class="flex justify-between w-full h-full lg:-mx-auto">
+
+                {{-- Left Side --}}
+                <div class="flex items-center -px-4">
+
+                    <a href="/" class="">
+                        <img src="/img/logo.png" alt="Clauber Oliveira" class="h-10">
+                    </a>
+
+                    <a href="{{route('home')}}" class="navbar-item h-full text-center">Dashboard</a>
+
                     <a href="{{route('admin.project.index')}}" class="navbar-item">Projects</a>
-            
-            </div>
-            
-            <div class="navbar-end">
 
-                <div class="navbar-item has-dropdown" id="right-button">
+                </div>
 
-                        <a class="navbar-link" onclick="event.preventDefault();
+                {{-- Right Side --}}
+                <div class="">
+
+                    <a class="navbar-link" onclick="event.preventDefault();
                         document.getElementById('right-button').classList.toggle('is-active');">
-                            {{ Auth::user()->name }}
-                        </a>
+                        {{ Auth::user()->name }}
+                    </a>
 
-                        <div class="navbar-dropdown is-right">
+                    <div class="navbar-dropdown is-right">
 
-                            <div class="navbar-item">
-                                <a class="navbar-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                        <div class="">
+                            <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                                {{ __('Logout') }}
+                            </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                </form>
-
-                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
 
                         </div>
+
+                    </div>
                 </div>
 
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </header>

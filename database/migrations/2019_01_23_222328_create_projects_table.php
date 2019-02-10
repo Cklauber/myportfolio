@@ -15,17 +15,36 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title')->unique();
-            $table->string('slug')->unique();
+
+            $table->string('title');
+
+            $table->string('slug');
+
             $table->text('description');
+
+            $table->enum('status', [
+                'completed',
+                'work in progress',
+                'canceled',
+                'initiated'])->default('initiated');
+
+            $table->boolean('is_public')
+            ->default(false)
+            ->comment('Can anyone view this project?');
+
+            $table->json('stack')->nullable();
+
+            $table->string('repository')->default('');
+
+            $table->boolean('is_public_repository')->default(false);
+
             $table->unsignedInteger('owner_id')->unsigned();
-            $table->enum('status', ['completed', 'word in progress', 'cancel', 'drafted', 'created'])->default('initiated');
-            $table->boolean('published')->default('false');
+
             $table->foreign('owner_id')
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
-            $table->json('stack')->nullable();
+
             $table->timestamps();
         });
     }
