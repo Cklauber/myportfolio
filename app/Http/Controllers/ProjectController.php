@@ -5,19 +5,27 @@ namespace App\Http\Controllers;
 use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class ProjectController extends Controller
 {
-    public function publicNonAdmin($username, Project $project)
+    public function public()
     {
-        $user = App\User::where('username', $username)->firstOrFail();
-        $project = $user->projects->where('slug', $project)->firstOrFail();
+         
+    }
 
-        if ($project->is_public == true) {
-            return view('public.project');
-        } else {
-            return abort(403, 'Unauthhorized.');
+    public function publicNonAdmin($username, $project)
+    {
+        $project = User::where('username', $username)->firstOrFail()
+        ->projects->where('slug', $project)->first();
+
+        if (isset($project)) {
+            if ($project->is_public == true) {
+                return view('public.project');
+            }
+            return abort(403);
         }
+        return abort(404);
     }
     /**
      * Display a listing of the resource.
@@ -55,11 +63,14 @@ class ProjectController extends Controller
             'description' => 'required',
             'slug' => 'nullable',
             'stack' => 'nullable',
+            'status' => 'nullable',
+            'is_public' => 'required',
+            'repository' => 'nullable',
+            'is_public_repository' => 'required'
         ]);
         if (request('slug') == '') {
             $attributes['slug'] = str_slug(request('title'));
         }
-
         //Persist
         Auth::user()->projects()->create($attributes);
 

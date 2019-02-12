@@ -16,16 +16,14 @@ class Project extends BaseModel
 
     public function publicPath()
     {
-        if ($this->is_public == true) {
-            if ($this->owner_id == 1) {
-                return route('public.project.show/', $this->slug);
-            } else {
-                return route('public.user.project.show', [
-                    'username' => $this->owner->username,
-                    'slug' => $this->slug]);
-            }
+        //We are going to find out if this is going to be used by the main/admin user or not
+        //So that we can provide the correct route
+        if ($this->owner_id == 1) {
+            return route('public.project.show', $this->slug);
         } else {
-            return abort(403, 'Unauthhorized.');
+            return route('public.user.project.show', [
+                'username' => $this->owner->username,
+                'slug' => $this->slug]);
         }
     }
 

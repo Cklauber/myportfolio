@@ -115,10 +115,19 @@ class ManageProjectsTest extends TestCase
 
     /** @test */
     
-    public function a_public_repository_can_be_seen()
+    public function a_public_project_can_be_seen_by_the_public()
     {
         $project = factory('App\Project')->create(['is_public' => true]);
-        $this->get($project->publicPath())->assertStatus(402);
-        dd($project);
+
+        $this->get($project->publicPath())->assertStatus(200);
+    }
+
+    /** @test */
+    
+    public function a_private_project_cannot_be_seen_by_the_public()
+    {
+        $project = factory('App\Project')->create(['is_public' => false]);
+
+        $this->get($project->publicPath())->assertStatus(403);
     }
 }

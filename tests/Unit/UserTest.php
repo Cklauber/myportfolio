@@ -18,4 +18,12 @@ class UserTest extends TestCase
         
         $this->assertInstanceOf(Collection::class, $user->projects);
     }
+
+    /** @test */
+    public function an_admin_can_have_pages()
+    {
+        $user = factory('App\User')->create();
+        
+        $this->assertInstanceOf(Collection::class, $user->pages);
+    }
 }

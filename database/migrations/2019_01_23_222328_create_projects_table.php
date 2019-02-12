@@ -30,7 +30,7 @@ class CreateProjectsTable extends Migration
 
             $table->boolean('is_public')
             ->default(false)
-            ->comment('Can anyone view this project?');
+            ->comment('Can guests view this project?');
 
             $table->json('stack')->nullable();
 
