@@ -1,14 +1,15 @@
 
 <div class="card" style="height:200px">
     {{-- Title --}}
-    <h4 class="text-lg mb-4">
-        @if (isset($titleIsLink) == true)
+    @if (isset($titleIsLink) == true)
+        <h4 class="text-lg mb-4">
             <a href="{{ $project->privatePath()}}" class="no-underline text-grey-dark hover:text-black">{{$project->title}}</a>
-        @else
-            <h3 class="no-underline text-grey-darkest">{{$project->title}}</h3>
-        @endif
+        </h4>
+    @else
+        <h3 class="no-underline text-grey-darkest">{{$project->title}}</h3>
+    @endif
 
-    </h4>
+
 
     {{-- Description --}}
     <div class="text-base mb-4 text-grey-darker">{{str_limit($project->description, 100)}}</div>

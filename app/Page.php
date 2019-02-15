@@ -2,13 +2,11 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Auth;
-
 class Page extends BaseModel
 {
     public function owner()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function post()
@@ -23,9 +21,16 @@ class Page extends BaseModel
     public function publicPath()
     {
         if ($this->owner_id == 1) {
+            return route('page.public', $this->slug);
+        }
 
-            return route('public.page.show', $this->slug);
+        return '/';
+    }
 
+    public function privatePath()
+    {
+        if ($this->owner_id == 1) {
+            return route('page.show', $this->slug);
         }
 
         return '/';

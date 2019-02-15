@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('public.index');
 });
@@ -20,20 +19,20 @@ Route::get('/project/{slug}', 'ProjectController@public')->name('public.project.
 
 Route::get('/project/{username}/{slug}', 'ProjectController@publicNonAdmin')->name('public.user.project.show');
 
-Route::get('/{page}', 'PageController@public')->name('public.page.show');
-
 Route::prefix('/admin')->middleware('auth')->group(function () {
     //https://laravel.com/docs/5.7/controllers#resource-controllers
     Route::resource('project', 'ProjectController')
-    ->names([
-        'index' => 'admin.project.index',
-        'show' => 'admin.project.show',
-    ]);
+            ->names([
+                'index' => 'admin.project.index',
+                'show' => 'admin.project.show',
+            ]);
+
     Route::resource('page', 'PageController')
-    ->names([
-        'index' => 'admin.page.index',
-        'show' => 'admin.page.show',
-    ]);
+            ->names([
+                'index' => 'admin.page.index',
+            ]);
 
     Route::get('/home', 'HomeController@index')->name('home');
 });
+
+Route::get('/{page}', 'PageController@public')->name('page.public');

@@ -1,6 +1,7 @@
 <?php
 
  // Authentication Routes...
+
  Route::get('admin', 'Auth\LoginController@showLoginForm')->name('login');
  Route::post('admin', 'Auth\LoginController@login');
  Route::post('logout', 'Auth\LoginController@logout')->name('logout');

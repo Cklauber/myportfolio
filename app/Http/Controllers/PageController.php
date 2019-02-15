@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Page;
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Http\Validation\PageSlug;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.admin', ['except' => ['public']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -41,18 +46,25 @@ class PageController extends Controller
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'slug' => 'nullable',
+            'slug' => [
+                'required',
+                'unique:pages',
+                new PageSlug()
+            ],
             'is_public' => 'required',
             'is_in_navbar' => 'required',
             'content' => 'required',
             'status' => 'required'
         ]);
+        
+        if (request('slug') == '') {
+            $attributes['slug'] = str_slug(request('title'));
+        }
 
-        $attributes['slug'] == '' ?: $attributes['slug'] = str_slug($attributes['title']);
-
+        //persist
         Auth::user()->pages()->create($attributes);
 
-        return redirect(route('page.index'));
+        return redirect(route('admin.project.index'));
     }
 
     /**
@@ -102,6 +114,6 @@ class PageController extends Controller
 
     public function public(Page $page)
     {
-        return view('page.public', compact('page'));
+        return view('page.public', compact(['page', 'routes']));
     }
 }

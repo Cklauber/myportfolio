@@ -17,6 +17,13 @@
 
                     <a href="{{route('admin.project.index')}}" class="navbar-item">Projects</a>
 
+                    @if (\Auth::user()->id == 1)
+
+                    <a href="{{route('admin.page.index')}}" class="navbar-item">Pages</a>
+
+                    @endif
+                    
+
                 </div>
 
                 {{-- Right Side --}}

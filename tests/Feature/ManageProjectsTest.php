@@ -17,10 +17,10 @@ class ManageProjectsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->signIn();
-
+        $this->beAdmin();
+        
         $this->get((route('project.create')))->assertStatus(200);
-
+        
         $attributes = factory('App\Project')->raw(['owner_id' => \Auth::id()]);
 
         $this->post(route('project.store'), $attributes);

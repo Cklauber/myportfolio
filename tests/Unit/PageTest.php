@@ -21,8 +21,7 @@ class PageTest extends TestCase
     }
 
     /** @test */
-    
-    public function a_published_public_page_has_a_path()
+    public function a_published_public_page_has_a_public_path()
     {
         $this->beAdmin();
 
@@ -31,6 +30,19 @@ class PageTest extends TestCase
             'status' => 'posted'
         ]);
 
-        $this->assertEquals($page->publicPath(), route('public.page.show', $page->slug));
+        $this->assertEquals($page->publicPath(), route('page.public', $page->slug));
+    }
+
+    /** @test */
+    public function a_page_has_a_private_path()
+    {
+        $this->beAdmin();
+
+        $page = factory('App\Page')->create([
+            'is_public' => true,
+            'status' => 'posted'
+        ]);
+
+        $this->assertEquals($page->privatePath(), route('page.show', $page->slug));
     }
 }

@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Foundation\Auth\User;
+use App\User;
 
 abstract class TestCase extends BaseTestCase
 {

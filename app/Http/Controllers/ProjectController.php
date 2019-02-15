@@ -11,7 +11,6 @@ class ProjectController extends Controller
 {
     public function public()
     {
-         
     }
 
     public function publicNonAdmin($username, $project)
@@ -61,7 +60,7 @@ class ProjectController extends Controller
         $attributes = request()->validate([
             'title' => 'required',
             'description' => 'required',
-            'slug' => 'nullable',
+            'slug' => 'unique',
             'stack' => 'nullable',
             'status' => 'nullable',
             'is_public' => 'required',
