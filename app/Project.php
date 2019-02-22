@@ -4,10 +4,16 @@ namespace App;
 
 class Project extends BaseModel
 {
+    protected $casts =[
+        'is_public' => 'boolean',
+        'is_public_repository' => 'bboolean'
+
+    ];
     public function owner()
     {
         return $this->belongsTo(User::class);
     }
+
 
     public function privatePath()
     {

@@ -60,13 +60,14 @@ class ProjectController extends Controller
         $attributes = request()->validate([
             'title' => 'required',
             'description' => 'required',
-            'slug' => 'unique',
+            'slug' => 'nullable',
             'stack' => 'nullable',
             'status' => 'nullable',
             'is_public' => 'required',
             'repository' => 'nullable',
             'is_public_repository' => 'required'
         ]);
+        
         if (request('slug') == '') {
             $attributes['slug'] = str_slug(request('title'));
         }
@@ -100,7 +101,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        if (auth()->user()->isNot($project->owner)) {
+            return abort(403);
+        }
+        
+        return view('projects.edit', compact(['project']));
     }
 
     /**
@@ -112,7 +117,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        //Validate
+        $attributes = request()->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'slug' => 'nullable',
+        'stack' => 'nullable',
+        'status' => 'nullable',
+        'is_public' => 'required',
+        'repository' => 'nullable',
+        'is_public_repository' => 'required'
+    ]);
+
+        if (request('slug') == '') {
+            $attributes['slug'] = str_slug(request('title'));
+        }
+        //Persist
+        $project->update($attributes);
+
+        //Redirect
+        return redirect(route('admin.project.index'));
     }
 
     /**

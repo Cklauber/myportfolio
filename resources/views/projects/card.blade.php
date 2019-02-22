@@ -16,7 +16,7 @@
 
     @if (isset($displayButtons) == true)
     <div class="flex items-center pin-b absolute mb-4 justify-between w-full pr-8"> {{-- Buttons --}}
-            <a class="btn btn-blue" href="">Edit</a>
+            <a class="btn btn-blue" href="{{$project->privatePath() . '/edit'}}">Edit</a>
             <a class="btn btn-green" href="{{ $project->publicPath()}}">Overview</a>
             <a class="btn btn-red" href="">Delete</a>
     </div>

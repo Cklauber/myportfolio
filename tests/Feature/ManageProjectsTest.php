@@ -92,6 +92,26 @@ class ManageProjectsTest extends TestCase
     }
 
     /** @test */
+    public function a_user_can_edit_their_project()
+    {
+        $this->withoutExceptionHandling();
+        
+        $this->beAdmin();
+        $project = factory('App\Project')->create();
+
+        $this->get($project->privatePath(). '/edit')
+        ->assertSee($project->title)
+        ->assertSee($project->description);
+
+        $project['title'] = 'changed';
+
+        $this->patch($project->privatePath(), $project->toarray());
+        $this->assertDatabaseHas('projects', [
+            'title' => 'changed'
+        ]);
+    }
+
+    /** @test */
 
     public function a_project_requires_a_title()
     {
